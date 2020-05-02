@@ -1,0 +1,12 @@
+#/bin/bash
+
+tmux new-session \; \
+	send-keys 'cd ~/workspace/' C-m \; \
+	send-keys 'cat ~/bin/my_notes' C-m \; \
+	split-window -h \; \
+	split-window -v \; \
+	select-pane -t 1 \; \
+	split-window -v -p 15 \; \
+	send-keys 'cd ~/workspace/' C-m \; \
+	select-pane -t 1 \;
+ 

@@ -1,0 +1,125 @@
+
+
+General
+	who -u				# Print who is logged in with PID
+	sudo kill -9 PID		# Kill specific process
+	sudo kill -9 -u <username>	# Kill all processes of specific user
+
+vim
+	:set number			# (vim command mode) Displays line number (shortcut: set nu)
+	:set nonumber		# (vim command mode) Hide line number
+	:set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<,space:_   # (vim command mode) Set whitespace characters to some characters
+	:set list			# (vim command mode) Show listchars (i.e. whitespace characters)
+
+vimdiff
+	ctrl+w, left,right	# (vimdiff) CMD switch to left|right window
+	]c					# (vimdiff) CMD go to next block of diff
+	[c					# (vimdiff) CMD go to previous diff
+	dp					# (vimdiff) CMD diff-put puts changes under cursor into the other file
+	do					# (vimdiff) CMD diff-obtain changes under cursor from other file
+	zR					# (vimdiff) CMD to see whole file
+	za					# (vimdiff) CMD to see only changes
+
+Services / daemons
+	service --status-all 		# Status of all services
+
+git
+	git config -l			# [--list] of git configuration
+	cat .git/config			# git project configuration
+	git branch			# display actual branch
+	git branch -aa			# display all branches
+	git branch -aavv		# display all branches with last commit and more info
+	git branch -vv			# display local branches and their tracking upstream
+	git checkout <branch_name>	# switch to existing (remote) branch
+	git checkout -b <new_branch>	# create new local branch and switch to it
+	git log				# show history
+	git log --full-history --all --oneline --decorate --graph	# show whole nice log with graph
+	git log --oneline --graph					# display history with graph
+	git push -u origin maj.12/topic/tm_mfp_device			# push local branch to remote server and setup this branch to be tracking
+	git push origin <branch_name>	# push changes in local brnach to the remote
+	git branch --set-upstream-to origin/<branch>			# set actual branch to track remote branch
+	git merge <branch_name> 	# merge 'branch_name' into actual branch
+	git diff branch1..branch2	# differences between 2 branches
+	git config --list		# display actual git configuration
+	git config --global user.name "Michal Broucek"	# Setup user name
+	git config --global user.name "Michal Broucek"	# Setup user email
+	git remote add upstream git@url_to_gitlab:Project_path.git 	# Add new remote as 'upstream'
+	git remote set-url --push upstream no_push	# Setup remote 'upstream' for no push (fetch,pull only)
+	git grep -n "name_of_function"			# Search function name_of_function inside the git project with line nmb
+	
+
+package systems
+	apt info PACKAGE*		# Info about package
+	dpkg -s PACKAGE_NAME		# Info about package if it's install or not
+	
+	
+systemd
+	systemctl status serviceName		# display status of service
+	systemctl start serviceName			# start service configured in /etc/systemd/system/
+	systemctl stop serviceName			# stop service configured in /etc/systemd/system/
+	systemctl				# list of all loaded units
+	systemctl --type=service		# list of all loaded services
+	systemctl --type=service --state=running	# list of all running services
+	systemctl list-unit-files --state=enabled	# list all enabled units
+	systemctl list-unit-files			# list all units state
+	sudo journalctl				# display all logs from systemd
+	sudo journalctl -b			# display all logs from systemd from last boot
+	sudo journalctl --since yesterday	# display all logs since yesterday
+	sudo journalctl --since "2019-09-26 03:10:00"	# display all logs since date and time
+	sudo journalctl --since 03:30 --until now	# display all logs in time window
+	sudo journalctl -u serviceFileName.service	# display logs from one service
+	sudo journalctl -u serviceFileName.service --since today	# display logs from one service with time specification
+	sudo journalctl /home/path/to/executable	# dispaly logs by path to executable or script
+	sudo journalctl -k						# display kernel messages for actual boot
+	sudo journalctl -p err -b					# display error kernel messages for actual boot
+	sudo journalctl -p err						# display error messages for actual boot
+	sudo journalctl -n				# display recent logs
+	sudo journalctl -n 20				# display last 20 log entries
+	sudo journalctl -f				# display logs online
+	sudo journalctl --disk-usage			# display current log size on the disk
+
+network
+	ls -l /sys/class/net/<devname>/device/driver 	# shows which driver is used for network interface
+	ss		# Display ifno about opened sockets (TCP/UDP/Unix)
+	ss -ltux	# Display listen sockets (t=TCP, u=UDP, x=Unix Sockets)
+	ss -ta		# Display all interfaces (listening and nin-listening) (add 'a')
+	ss -ta state established	# Display filter sockets in specific state
+	ss -ta dst 127.0.0.1		# Display sockets for 'dst' (destionation) or 'src' (source) address
+	ss -s				# Display statistics
+	ss -aeonp			# Display sockets a=all, e=detail info, o-timer info, n=do not resolve addresses, p=show process
+	nmcli					# Network Manager command line tool (Network configuration in Debian9)
+	nmtui					# Network Manager text based GUI tool (same as above)
+	/etc/NetworkManager/system-connections	# Network configuration for NetworkManager in Debian9
+	/etc/init.d/network-manager restart	# Restart NetworkManager service
+	sudo journalctl -u NetworkManager	# Display log from NetworkManager
+
+python
+	~/.local/bin/virtualenvwrapper.sh		# Scripts for workon ... other config in .bashrc
+	mkvirtualenv -p /usr/bin/python3 VirtName	# Create virtual env with python3 as default interpreter
+	workon						# Display list of virtual env
+	workon p3virt					# Activate p3virt virtual environment
+	(p3virt) deactivate				# Deactivate (actual) virtual env 
+
+Bash
+	du -sh /folder		# Over-all size of the folder
+	du -shc /folder/*	# Individual sub-folder size
+
+
+docker
+	docker images -a		# List of all images (including intermadiate image layers)	
+	docker ps			# List of running containers
+	docker ps -a			# List all docker containers
+	docker rmi IMAGE_ID		# Remove image with spec. ID
+	docker stop CONTAINER_ID	# Stop running container
+	docker stop $(docker ps -a -q)	# Stop all containers
+	docker rm CONTAINER_ID		# Remove container by ID or name
+	docker rm -f CONTAINER_ID	# Remove container by ID or name
+	docker container prune -f	# Remove all stopped (unused) docker containers
+	docker container ls -a		# List of all containers
+	docker run -ti --privileged REPOSITORY:TAG	# Run docker container in interractive mode
+	docekr search NAME_OF_IMAGE	# Search available image on the docker hub
+	docker image prune		# Remove 'dangling' images
+	docker system prune		# Remove dangling images, build cache, stopped containers ...
+	docker run -ti --privileged mentor:devel  	# Run docker image in interractive mode mentor:devel
+	docker commit CONTAINER_ID REPOSITORY:TAG	# Commit changes in container into image
+

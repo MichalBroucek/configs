@@ -1,0 +1,6 @@
+#/bin/bash
+
+echo "------ My commands help ------"
+cat ~/bin/my_help
+echo -e "\n\n"
+

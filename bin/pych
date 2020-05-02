@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo -e "Opening Pycharm editor...\n"
+~/SW_local/pycharm-community-2019.3.3/bin/pycharm.sh &
+
+echo -e "Done ...\n\n"

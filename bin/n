@@ -1,0 +1,6 @@
+#/bin/bash
+
+echo "------ My notes -----"
+cat ~/bin/my_notes
+echo -e "\n"
+
