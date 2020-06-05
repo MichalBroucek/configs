@@ -123,3 +123,13 @@ docker
 	docker run -ti --privileged mentor:devel  	# Run docker image in interractive mode mentor:devel
 	docker commit CONTAINER_ID REPOSITORY:TAG	# Commit changes in container into image
 
+yocto
+	bitbake -c menuconfig virtual/kernel			# 1. Changing kernel configuration
+	bitbake -c savedefconfig virtual/kernel			# 2. Save new kernel configuration
+	bitbake -c kernel_configcheck virtual/kernel	# Check kernel configuration
+	bitbake package-index							# Create package index
+	bitbake-layers show-layers						# Display existing layers
+	bitbake-layers show-recipes						# Display existing recipes
+	bitbake-layers help								# Display general help
+	bitbake-layers add-layer						# Add a layer to bblayers.conf
+	bitbake-layers remove-layer						# Remove a layer from bblayers.conf
